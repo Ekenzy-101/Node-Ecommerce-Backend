@@ -64,7 +64,7 @@ module.exports.verifyEmail = {
       firstname: user.firstname,
       email: user.email,
       templateId: process.env.ACTIVATE_EMAIL_ID,
-      link: `${process.env.FRONTEND_ENDPOINT}verified-email/${token}`,
+      link: `${process.env.FRONTEND_ENDPOINT}/verified-email/${token}`,
     };
     await sendMail(mailData);
     return "Success";
@@ -85,7 +85,7 @@ module.exports.sendResetToken = {
       firstname: user.firstname,
       email: user.email,
       templateId: process.env.PASSWORD_RESET_ID,
-      link: `${process.env.FRONTEND_ENDPOINT}password-reset/`,
+      link: `${process.env.FRONTEND_ENDPOINT}/password-reset/`,
       token,
     };
     await sendMail(mailData);
