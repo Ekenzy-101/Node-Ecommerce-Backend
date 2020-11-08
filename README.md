@@ -39,4 +39,5 @@ This project is the backend of an ecommerce website created with React, where us
   `SENDGRID_API_KEY=<Your Sendgrid secret key>`
   `SENDER=<Your verified email on sendgrid>`
 
+- Run `node seed.js` to populate the database with data gotten from [spooncular](http://spoonacular.com)
 - Run `npm start` to start the server
