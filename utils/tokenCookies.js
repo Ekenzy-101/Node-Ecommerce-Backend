@@ -4,7 +4,7 @@ module.exports = ({ accessToken, refreshToken }) => {
     secure: true, //for HTTPS only
     path: "/",
     // domain: process.env.FRONTEND_ENDPOINT,
-    // sameSite: "none",
+    sameSite: "none",
   };
   return {
     access: ["access", accessToken, cookieOptions],
