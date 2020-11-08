@@ -11,7 +11,7 @@ const config =
     : { origin: process.env.FRONTEND_ENDPOINT, credentials: true };
 
 module.exports = async (app) => {
-  app.set("trust proxy", 1);
+  // app.set("trust proxy", 1);
   app.use(cors(config));
   app.use(cookieParser());
   app.use(validateToken);
