@@ -3,7 +3,7 @@ module.exports = ({ accessToken, refreshToken }) => {
     httpOnly: true,
     secure: true, //for HTTPS only
     domain: process.env.FRONTEND_DOMAIN,
-    sameSite: "none",
+    // sameSite: "none",
   };
   return {
     access: ["access", accessToken, cookieOptions],
