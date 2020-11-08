@@ -45,11 +45,11 @@ module.exports.verifyEmail = {
     email: { type: GraphQLString },
   },
   async resolve(parent, { email, _id }) {
-    const valid = Types.ObjectId.isValid(_id);
-    if (!valid) return new GraphQLError("Invalid Object ID");
-
     let user;
     if (_id) {
+      const valid = Types.ObjectId.isValid(_id);
+      if (!valid) return new GraphQLError("Invalid Object ID");
+
       user = await User.findById(_id);
       if (!user) return new GraphQLError("User does not exist");
     } else if (email) {

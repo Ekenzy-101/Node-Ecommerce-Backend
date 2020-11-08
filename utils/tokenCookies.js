@@ -2,8 +2,7 @@ module.exports = ({ accessToken, refreshToken }) => {
   const cookieOptions = {
     httpOnly: true,
     secure: true, //for HTTPS only
-    // domain: process.env.FRONTEND_ENDPOINT,
-    // sameSite: "none",
+    domain: process.env.FRONTEND_ENDPOINT,
   };
   return {
     access: ["access", accessToken, cookieOptions],
