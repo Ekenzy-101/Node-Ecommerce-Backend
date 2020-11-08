@@ -24,8 +24,14 @@ module.exports = async (req, res, next) => {
 
     if (!user || user.tokenCount !== decodedRefreshToken.user.count) {
       // Remove Cookies if token not valid
-      res.clearCookie("access");
-      res.clearCookie("refresh");
+      res.clearCookie("access", {
+        path: "/",
+        domain: process.env.COOKIE_DOMAIN,
+      });
+      res.clearCookie("refresh", {
+        path: "/",
+        domain: process.env.COOKIE_DOMAIN,
+      });
       return next();
     }
     const userTokens = await setTokens(user);
