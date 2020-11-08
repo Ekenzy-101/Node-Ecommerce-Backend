@@ -155,9 +155,6 @@ module.exports.login = {
     password: { type: new GraphQLNonNull(GraphQLString) },
   },
   async resolve(parent, args, { res }) {
-    let error = validateOnLogin(args);
-    if (error) return error;
-
     let user = await User.findOne({ email: args.email });
     if (!user) return new GraphQLError("Invalid Email or Password");
 
