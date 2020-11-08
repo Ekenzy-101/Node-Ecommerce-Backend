@@ -1,7 +1,6 @@
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { graphqlHTTP } = require("express-graphql");
-const { GraphQLError } = require("graphql");
 const schema = require("../schema");
 const validateToken = require("../middlewares/validateToken");
 
@@ -18,11 +17,7 @@ module.exports = async (app) => {
     "/graphql",
     graphqlHTTP(async (req, res) => ({
       schema,
-      // customFormatErrorFn: (error) => {
-      //   if (error.originalError instanceof GraphQLError) return error;
-      //   return error;
-      // },
-      context: { req, res },
+      context: { req, res }, // Get access to the Response object
       pretty: true,
       graphiql: true,
     }))

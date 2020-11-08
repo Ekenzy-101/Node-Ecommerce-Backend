@@ -27,8 +27,7 @@
     "mongoose": "5.10.8",
     "mongoose-simple-random": "0.4.1",
     "stripe": "8.118.0",
-    "validator": "13.1.17",
-    "winston": "^3.3.3"
+    "validator": "13.1.17"
   },
   "engines": {
     "node": "12.13.1",

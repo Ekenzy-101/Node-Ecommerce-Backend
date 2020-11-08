@@ -5,7 +5,7 @@ const { Types } = require("mongoose");
 const User = require("../models/user");
 const { UserType } = require("../objectTypes");
 const { sendMail } = require("../utils/mail");
-const { validateOnRegister, validateOnLogin } = require("../utils/validation");
+const { validateOnRegister } = require("../utils/validation");
 const verifyToken = require("../utils/verifyToken");
 const setTokens = require("../utils/setTokens");
 const tokenCookies = require("../utils/tokenCookies");
@@ -176,6 +176,7 @@ module.exports.login = {
 module.exports.logout = {
   type: GraphQLString,
   async resolve(parent, args, { res }) {
+    // Clear cookies with the same options used to create it
     res.clearCookie("access", cookieOptions);
     res.clearCookie("refresh", cookieOptions);
     return true;
