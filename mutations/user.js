@@ -10,6 +10,7 @@ const verifyToken = require("../utils/verifyToken");
 const setTokens = require("../utils/setTokens");
 const tokenCookies = require("../utils/tokenCookies");
 const { createCustomer } = require("../stripe/customer");
+const { cookieOptions } = require("../utils/cookieOptions");
 
 module.exports.register = {
   type: UserType,
@@ -175,11 +176,8 @@ module.exports.login = {
 module.exports.logout = {
   type: GraphQLString,
   async resolve(parent, args, { res }) {
-    res.clearCookie("access", { path: "/", domain: process.env.COOKIE_DOMAIN });
-    res.clearCookie("refresh", {
-      path: "/",
-      domain: process.env.COOKIE_DOMAIN,
-    });
+    res.clearCookie("access", cookieOptions);
+    res.clearCookie("refresh", cookieOptions);
     return true;
   },
 };

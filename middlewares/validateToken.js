@@ -5,6 +5,7 @@ const {
 const User = require("../models/user");
 const setTokens = require("../utils/setTokens");
 const tokenCookies = require("../utils/tokenCookies");
+const { cookieOptions } = require("../utils/cookieOptions");
 
 module.exports = async (req, res, next) => {
   const refreshToken = req.cookies["refresh"];
@@ -24,14 +25,8 @@ module.exports = async (req, res, next) => {
 
     if (!user || user.tokenCount !== decodedRefreshToken.user.count) {
       // Remove Cookies if token not valid
-      res.clearCookie("access", {
-        path: "/",
-        domain: process.env.COOKIE_DOMAIN,
-      });
-      res.clearCookie("refresh", {
-        path: "/",
-        domain: process.env.COOKIE_DOMAIN,
-      });
+      res.clearCookie("access", cookieOptions);
+      res.clearCookie("refresh", cookieOptions);
       return next();
     }
     const userTokens = await setTokens(user);
