@@ -175,8 +175,8 @@ module.exports.login = {
 module.exports.logout = {
   type: GraphQLString,
   async resolve(parent, args, { res }) {
-    res.clearCookie("access");
-    res.clearCookie("refresh");
+    res.clearCookie("access", { path: "/" });
+    res.clearCookie("refresh", { path: "/" });
     return true;
   },
 };
