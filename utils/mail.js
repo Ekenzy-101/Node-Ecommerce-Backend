@@ -12,7 +12,7 @@ module.exports.sendMail = async (data) => {
         firstname: data.firstname,
         link: data.link,
         token: data.token ? data.token : "",
-        logo: "https://kenzy-ecommerce.s3.af-south-1.amazonaws.com/logo-1.jpg",
+        logo: "https://kenzyfood.vercel.app/images/logo.png",
       }, // Data to embed in the dynamic template
     });
     console.log("Sent");
@@ -28,6 +28,7 @@ module.exports.sendReceiptMail = async ({
   date,
   last4,
   receipt_url,
+  receipt_number,
   card_logo,
   description,
 }) => {
@@ -42,6 +43,7 @@ module.exports.sendReceiptMail = async ({
         date,
         last4,
         receipt_url,
+        receipt_number,
         card_logo,
         description,
       }, // Data to embed in the dynamic template

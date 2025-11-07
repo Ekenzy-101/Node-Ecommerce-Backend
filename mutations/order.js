@@ -75,6 +75,8 @@ module.exports.takeOrder = {
       last4: card.card ? card.card.last4 : "4242",
       templateId: process.env.RECEIPT_EMAIL_ID,
       date: formatDate(charge.created),
+      receipt_number: charge.receipt_number,
+      receipt_url: charge.receipt_url,
     };
     // Add Order to the recipe
     await addOrderstoRecipe(order._id, carts);

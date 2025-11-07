@@ -1,5 +1,5 @@
 {
-  "name": "eccomerce-node-backend",
+  "name": "kenzyfood-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -26,11 +26,10 @@
     "lodash": "4.17.20",
     "mongoose": "5.10.8",
     "mongoose-simple-random": "0.4.1",
-    "stripe": "8.118.0",
+    "stripe": "^19.3.0",
     "validator": "13.1.17"
   },
-  "engines": {
-    "node": "12.13.1",
-    "npm": "6.12.1"
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
