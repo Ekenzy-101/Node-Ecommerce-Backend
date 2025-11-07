@@ -30,7 +30,7 @@ module.exports.takeOrder = {
     if (!payment) return new GraphQLError("Payment does not exist");
 
     const address = await Address.findById(addressId);
-    if (!payment) return new GraphQLError("Address does not exist");
+    if (!address) return new GraphQLError("Address does not exist");
 
     const carts = [...user.carts];
 
@@ -134,13 +134,12 @@ async function addOrderstoRecipe(orderId, recipeIds = []) {
 }
 
 function getCardLogo(payment) {
-  if (!payment)
-    return "https://kenzy-ecommerce.s3.af-south-1.amazonaws.com/mastercard.png";
+  if (!payment) return "https://kenzyfood.vercel.app/images/mastercard.png";
 
   if (payment.card.brand.toLowerCase() === "visa")
-    return "https://kenzy-ecommerce.s3.af-south-1.amazonaws.com/visa.png";
+    return "https://kenzyfood.vercel.app/images/visa.png";
 
-  return "https://kenzy-ecommerce.s3.af-south-1.amazonaws.com/mastercard.png";
+  return "https://kenzyfood.vercel.app/images/mastercard.png";
 }
 
 function formatDate(timestamp) {
