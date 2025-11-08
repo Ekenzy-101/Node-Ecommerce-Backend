@@ -12,7 +12,7 @@ const Payment = require("../models/payment");
 const Recipe = require("../models/recipe");
 const { createPayment } = require("../stripe/payment");
 const { getPaymentMethod } = require("../stripe/card");
-const { sendReceiptMail } = require("../utils/mail");
+const { sendMail } = require("../utils/mail");
 
 module.exports.takeOrder = {
   type: GraphQLString,
@@ -69,14 +69,16 @@ module.exports.takeOrder = {
     const card_logo = getCardLogo(card);
     let mailData = {
       amount: cost,
+      card_logo,
+      date: formatDate(charge.created),
       description,
       email: user.email,
-      card_logo,
       last4: card.card ? card.card.last4 : "4242",
-      templateId: process.env.RECEIPT_EMAIL_ID,
-      date: formatDate(charge.created),
+      name: `${user.firstname} ${user.lastname}`,
       receipt_number: charge.receipt_number,
       receipt_url: charge.receipt_url,
+      subject: `[Kenzy Food] Your receipt [#${charge.receipt_number}]`,
+      templateId: process.env.RECEIPT_EMAIL_ID,
     };
     // Add Order to the recipe
     await addOrderstoRecipe(order._id, carts);
@@ -88,7 +90,7 @@ module.exports.takeOrder = {
     await user.save();
 
     // Send Receipt to the user
-    await sendReceiptMail(mailData);
+    await sendMail(mailData);
 
     return "Success";
   },

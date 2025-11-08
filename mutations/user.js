@@ -62,10 +62,13 @@ module.exports.verifyEmail = {
 
     const token = await user.generateEmailToken();
     const mailData = {
-      firstname: user.firstname,
       email: user.email,
-      templateId: process.env.ACTIVATE_EMAIL_ID,
+      firstname: user.firstname,
+      logo: "https://kenzyfood.vercel.app/images/logo.png",
       link: `${process.env.FRONTEND_ENDPOINT}/verified-email/${token}`,
+      name: `${user.firstname} ${user.lastname}`,
+      subject: `[Kenzy Food] Please verify your email address`,
+      templateId: process.env.ACTIVATE_EMAIL_ID,
     };
     await sendMail(mailData);
     return "Success";
@@ -83,10 +86,13 @@ module.exports.sendResetToken = {
 
     const token = await user.generateEmailToken();
     const mailData = {
-      firstname: user.firstname,
       email: user.email,
-      templateId: process.env.PASSWORD_RESET_ID,
+      firstname: user.firstname,
+      logo: "https://kenzyfood.vercel.app/images/logo.png",
       link: `${process.env.FRONTEND_ENDPOINT}/password-reset/`,
+      name: `${user.firstname} ${user.lastname}`,
+      subject: `[Kenzy Food] Please reset your password`,
+      templateId: process.env.PASSWORD_RESET_ID,
       token,
     };
     await sendMail(mailData);

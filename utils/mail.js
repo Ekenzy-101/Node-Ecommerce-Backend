@@ -1,53 +1,34 @@
-const sgMail = require("@sendgrid/mail");
+const { MailerSend, EmailParams, Sender, Recipient } = require("mailersend");
 
-module.exports.sendMail = async (data) => {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  try {
-    await sgMail.send({
-      to: data.email, // The recipient's email
-      from: process.env.SENDER, // The verified sender's email
-      templateId: data.templateId, // Dynamic Template ID
-      dynamicTemplateData: {
-        email: data.email,
-        firstname: data.firstname,
-        link: data.link,
-        token: data.token ? data.token : "",
-        logo: "https://kenzyfood.vercel.app/images/logo.png",
-      }, // Data to embed in the dynamic template
-    });
-    console.log("Sent");
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-module.exports.sendReceiptMail = async ({
+module.exports.sendMail = async ({
   email,
+  name,
+  subject,
   templateId,
-  amount,
-  date,
-  last4,
-  receipt_url,
-  receipt_number,
-  card_logo,
-  description,
+  ...data
 }) => {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   try {
-    await sgMail.send({
-      to: email, // The recipient's email
-      from: process.env.SENDER, // The verified sender's email
-      templateId, // Dynamic Template ID
-      dynamicTemplateData: {
-        amount,
-        date,
-        last4,
-        receipt_url,
-        receipt_number,
-        card_logo,
-        description,
-      }, // Data to embed in the dynamic template
+    const mailerSend = new MailerSend({
+      apiKey: process.env.EMAIL_API_KEY,
     });
+
+    const sentFrom = new Sender(process.env.EMAIL_SENDER, "Kenzy Food");
+
+    const recipients = [new Recipient(email, name)];
+
+    const personalization = [{ email, data }];
+
+    const emailParams = new EmailParams()
+      .setFrom(sentFrom)
+      .setTo(recipients)
+      .setReplyTo(sentFrom)
+      .setSubject(subject)
+      .setTemplateId(templateId)
+      .setPersonalization(personalization);
+
+    await mailerSend.email.send(emailParams);
+
+    console.log("Sent", subject);
   } catch (e) {
     console.error(e);
   }
