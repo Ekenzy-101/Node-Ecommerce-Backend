@@ -140,7 +140,6 @@ module.exports.activateEmail = {
   async resolve(parent, { token }) {
     // When the user hits the activate email route with token
     let user = await verifyToken(token);
-
     if (!user) return new GraphQLError("Invalid or Expired Token");
 
     const valid = Types.ObjectId.isValid(user._id);
