@@ -7,7 +7,7 @@ Kenzy Food is a full-stack ecommerce platform. This repository houses the Node.j
 - GraphQL API for products, categories, carts, and orders
 - JWT-based authentication with refresh-token rotation
 - Stripe webhook handling and payment intent orchestration
-- Email workflows powered by MailerSend dynamic templates
+- Email workflows powered by Nodemailer and dynamic templates
 - Seed scripts for bootstrapping demo data from Spoonacular
 
 ## Tech Stack
@@ -16,13 +16,13 @@ Kenzy Food is a full-stack ecommerce platform. This repository houses the Node.j
 - Express + Apollo Server for GraphQL
 - MongoDB with Mongoose ODM
 - Stripe Payments API
-- MailerSend Transactional Email
+- Nodemailer Transactional Email
 
 ## Prerequisites
 
 - Node.js 18+ and npm (or pnpm/yarn)
 - MongoDB Community Edition running locally or accessible remotely
-- Stripe and MailerSend accounts with API credentials
+- Stripe and Nodemailer accounts with API credentials
 
 ## Getting Started
 
@@ -47,11 +47,11 @@ Create a `.env` file in the project root and populate it with the following valu
 | `ACCESS_TOKEN_SECRET_KEY`  | Secret for signing short-lived JWT access tokens                        |
 | `REFRESH_TOKEN_SECRET_KEY` | Secret for signing long-lived refresh tokens                            |
 | `FRONTEND_ENDPOINT`        | URL of the frontend application                                         |
-| `ACTIVATE_EMAIL_ID`        | MailerSend dynamic template id for account activation                   |
-| `PASSWORD_RESET_ID`        | MailerSend dynamic template id for password resets                      |
-| `RECEIPT_EMAIL_ID`         | MailerSend dynamic template id for receipts                             |
-| `EMAIL_API_KEY`            | MailerSend API key                                                      |
-| `EMAIL_SENDER`             | Verified MailerSend domain address                                      |
+| `ACTIVATE_EMAIL_ID`        | Nodemailer dynamic template id for account activation                   |
+| `PASSWORD_RESET_ID`        | Nodemailer dynamic template id for password resets                      |
+| `RECEIPT_EMAIL_ID`         | Nodemailer dynamic template id for receipts                             |
+| `EMAIL_API_KEY`            | Nodemailer API key                                                      |
+| `EMAIL_SENDER`             | Verified Nodemailer email address                                       |
 
 Restart the server whenever environment variables change.
 
